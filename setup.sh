@@ -19,7 +19,7 @@ apt install -y python3 python3-venv python3-pip \
     libcairo2-dev libxt-dev libgirepository1.0-dev
 
 # Step 2: Install Python packages (PyGObject and pycairo via pip)
-echo "Installing PyGObject and pycairo via pip..."
+echo "Upgrading pip..."
 pip3 install --upgrade pip
 
 # Step 3: Set up Python virtual environment
