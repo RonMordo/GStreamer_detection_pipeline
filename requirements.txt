@@ -1,0 +1,13 @@
+# Core Dependencies
+numpy>=1.23.5
+opencv-python>=4.1.1
+pillow>=10.3.0
+torch>=1.8.0
+torchvision>=0.9.0
+matplotlib>=3.3
+PyYAML>=5.3.1
+scipy>=1.4.1
+tqdm>=4.66.3
+
+# Application-Specific Dependencies
+argparse  # Command-line argument parsing
