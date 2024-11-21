@@ -1,5 +1,30 @@
 #!/bin/bash
+
+# Check for superuser privileges for system-level installation
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root (use sudo) to install system-level dependencies."
+  exit 1
+fi
+
+echo "Starting setup..."
+
+# Step 1: Install system-level dependencies
+echo "Installing system-level dependencies..."
+apt update -y
+apt install -y python3 python3-venv python3-pip \
+    gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav \
+    libsm6 libxext6 libxrender-dev ffmpeg
+
+# Step 2: Set up Python virtual environment
+echo "Setting up Python virtual environment..."
 python3 -m venv venv
 source venv/bin/activate
+
+# Step 3: Install Python dependencies
+echo "Installing Python dependencies..."
+pip install --upgrade pip
 pip install -r requirements.txt
-echo "Environment setup complete. Activate it using 'source venv/bin/activate'."
+
+echo "Setup complete!"
+echo "Activate the environment using 'source venv/bin/activate'."
