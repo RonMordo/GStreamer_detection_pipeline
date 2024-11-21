@@ -31,12 +31,12 @@ def parse_arguments():
         "--source",
         type=str,
         default=default_video,
-        help="Path to the video file or camera input."
+        help="Path to the video file or 0 for camera input."
     )
     return parser.parse_args()
 
 args = parse_arguments()
-file_path = args.source
+input_source = args.source
 
 # Callback function for appsink to process new frames.
 def on_new_sample(sink):
@@ -81,11 +81,17 @@ def on_new_sample(sink):
    decodebin - An element which decoding the raw video file for processing.
    videoconvert - An element which makes sure the next element pad will understand the format of the video.
    video/x-raw,format=BGR - Specifying that the data stream consists of raw video frames, format=BGR specifies the format of the video frmaes.
+   v4l2src device= - An element which specifies the input source which in our case is the defult camera on our device.
    appsink - An element which responsible to act as a bridge between the GStreamer pipeline and the python app to get the frame from the pipeline.
    """
-pipeline = Gst.parse_launch(
-    f"filesrc location={file_path} ! decodebin ! videoconvert ! video/x-raw,format=BGR ! appsink name=sink"
-)
+if input_source == '0':
+    pipeline = Gst.parse_launch(
+        f"v4l2src device=/dev/video{input_source} ! videoconvert ! video/x-raw,format=BGR ! appsink name=sink"
+    )
+else:
+    pipeline = Gst.parse_launch(
+        f"filesrc location={input_source} ! decodebin ! videoconvert ! video/x-raw,format=BGR ! appsink name=sink"
+    )
 
 # Get and access the appsink element
 # For each frame the callback function on_new_sample is called.
