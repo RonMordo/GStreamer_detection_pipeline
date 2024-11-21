@@ -15,6 +15,8 @@ apt install -y python3 python3-venv python3-pip \
     gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav \
     libsm6 libxext6 libxrender-dev ffmpeg
+    python3-gi python3-gi-cairo gir1.2-gstreamer-1.0
+
 
 # Step 2: Set up Python virtual environment
 echo "Setting up Python virtual environment..."
