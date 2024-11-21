@@ -24,7 +24,7 @@ pip3 install --upgrade pip
 
 # Step 3: Set up Python virtual environment
 echo "Setting up Python virtual environment..."
-python3 -m venv venv
+python3 -m venv venv --system-site-packages
 source venv/bin/activate
 
 # Step 4: Install Python dependencies
